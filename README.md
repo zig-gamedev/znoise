@@ -1,4 +1,4 @@
-# znoise
+# [znoise](https://github.com/zig-gamedev/znoise)
 
 Zig build package and bindings for [FastNoiseLite](https://github.com/Auburn/FastNoiseLite)
 
