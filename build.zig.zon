@@ -1,5 +1,6 @@
 .{
-    .name = "znoise",
+    .name = .znoise,
+    .fingerprint = 0x20f0ee30a768ad80,
     .version = "0.3.0-dev",
     .paths = .{
         "build.zig",
