@@ -8,10 +8,13 @@ pub fn build(b: *std.Build) void {
         .root_source_file = b.path("src/znoise.zig"),
     });
 
-    const fnl = b.addStaticLibrary(.{
+    const fnl = b.addLibrary(.{
         .name = "FastNoiseLite",
-        .target = target,
-        .optimize = optimize,
+        .linkage = .static,
+        .root_module = b.createModule(.{
+            .target = target,
+            .optimize = optimize,
+        }),
     });
     fnl.linkLibC();
     fnl.addIncludePath(b.path("libs/FastNoiseLite"));
@@ -25,9 +28,11 @@ pub fn build(b: *std.Build) void {
 
     const tests = b.addTest(.{
         .name = "znoise-tests",
-        .root_source_file = b.path("src/znoise.zig"),
-        .target = target,
-        .optimize = optimize,
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/znoise.zig"),
+            .target = target,
+            .optimize = optimize,
+        }),
     });
     tests.linkLibrary(fnl);
     b.installArtifact(tests);
