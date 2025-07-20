@@ -1,6 +1,8 @@
 .{
-    .name = "znoise",
-    .version = "0.3.0-dev",
+    .name = .znoise,
+    .fingerprint = 0x20f0ee30f1de54ea,
+    .version = "0.4.0-dev",
+    .minimum_zig_version = "0.14.1",
     .paths = .{
         "build.zig",
         "build.zig.zon",
