@@ -16,9 +16,9 @@ pub fn build(b: *std.Build) void {
             .optimize = optimize,
         }),
     });
-    fnl.linkLibC();
-    fnl.addIncludePath(b.path("libs/FastNoiseLite"));
-    fnl.addCSourceFile(.{
+    fnl.root_module.link_libc = true;
+    fnl.root_module.addIncludePath(b.path("libs/FastNoiseLite"));
+    fnl.root_module.addCSourceFile(.{
         .file = b.path("libs/FastNoiseLite/FastNoiseLite.c"),
         .flags = &.{ "-std=c99", "-fno-sanitize=undefined" },
     });
@@ -34,7 +34,7 @@ pub fn build(b: *std.Build) void {
             .optimize = optimize,
         }),
     });
-    tests.linkLibrary(fnl);
+    tests.root_module.linkLibrary(fnl);
     b.installArtifact(tests);
 
     test_step.dependOn(&b.addRunArtifact(tests).step);
